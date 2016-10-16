@@ -48,6 +48,16 @@ class WxHandler(tornado.web.RequestHandler):
                 wechat.send_article_message(wechat.message.source, articles=articles)
 
 
+class WxGetUserHandler(tornado.web.RequestHandler):
+    def get(self):
+        # data = self.request.body.decode("utf-8")
+        # wechat.parse_data(data)
+        user_id = self.get_argument('user_id')
+        ret_json = wechat.get_user_info(user_id, lang='zh_CN')
+        self.set_header("Content-Type", "application/json;Charset=utf-8")
+        self.finish(json.dumps(ret_json))
+
+
 class TestHandler(tornado.web.RequestHandler):
     def get(self):
         ret_json = {"status": 0}
@@ -59,6 +69,7 @@ class TestHandler(tornado.web.RequestHandler):
 def make_app():
     return tornado.web.Application([
         (r"/wx", WxHandler),
+        (r"/wx_get_user", WxGetUserHandler),
         (r"/test", TestHandler),
     ])
 
