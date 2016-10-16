@@ -24,6 +24,11 @@ class WxHandler(tornado.web.RequestHandler):
         else:
             self.finish(echostr)
 
+    def post(self, *args, **kwargs):
+        root_logger.info('test post ...')
+        a = self
+        print(a)
+
 
 class TestHandler(tornado.web.RequestHandler):
     def get(self):
