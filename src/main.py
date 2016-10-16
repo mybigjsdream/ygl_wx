@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 import json
 
-from conf import root_logger, HOST_IP, HOST_PORT, token
+from conf import root_logger, HOST_IP, HOST_PORT, token, wechat
+from messages import EventMessage
 import tornado.ioloop
 import tornado.web
 import hashlib
@@ -25,9 +26,8 @@ class WxHandler(tornado.web.RequestHandler):
             self.finish(echostr)
 
     def post(self, *args, **kwargs):
-        root_logger.info('test post ...')
-        a = self
-        print(a)
+        if isinstance(wechat.message, EventMessage):
+            root_logger.info(wechat.message.type)
 
 
 class TestHandler(tornado.web.RequestHandler):

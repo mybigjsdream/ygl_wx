@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-from wechat_sdk import WechatConf
+from wechat_sdk import WechatConf, WechatBasic
 # import wechat_sdk
 
 
@@ -24,6 +24,7 @@ wx_conf = WechatConf(
     encrypt_mode='normal',
     encoding_aes_key='fas6LnAZM2A7bvmWhIcLecPgeeft2hxzFiOArs9p2P8'
 )
+wechat = WechatBasic(conf=wx_conf)
 
 
 # 数据库配置
