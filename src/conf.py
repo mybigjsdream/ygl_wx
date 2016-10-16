@@ -18,5 +18,7 @@ root_logger = logging.getLogger()
 DBSTR = 'sqlite:////data1/you-get-video/db/you-get.db'
 DBARGS = {'echo': False, 'echo_pool': False, 'encoding': 'UTF-8'}
 
-HOST_IP = '172.16.7.21'
-HOST_PORT = '8888'
+# HOST_IP = '172.16.7.21'
+HOST_IP = '0.0.0.0'
+# HOST_PORT = '8888'
+HOST_PORT = '80'
