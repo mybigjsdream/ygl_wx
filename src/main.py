@@ -2,19 +2,31 @@
 import json
 
 from conf import root_logger, HOST_IP, HOST_PORT
-# from model import VideoInfo, DBSession
-
-# from utils_asyn import asyn_download_video
-# from utils import qq_show_url_by_vid, get_video_id
 import tornado.ioloop
 import tornado.web
+import hashlib
+
+token = "dengjing"
 
 
-class AsynHandler(tornado.web.RequestHandler):
+class WxHandler(tornado.web.RequestHandler):
     def get(self):
         ret_json = {"status": 0}
-        self.set_header("Content-Type", "application/json;Charset=utf-8")
-        self.finish(json.dumps(ret_json))
+
+        signature = self.get_argument('signature')
+        timestamp = self.get_argument('timestamp')
+        nonce = self.get_argument('nonce')
+        echostr = self.get_argument('echostr')
+
+        list = [token, timestamp, nonce]
+        list.sort()
+        sha1 = hashlib.sha1()
+        hashcode = sha1.hexdigest()
+
+        if hashcode == signature:
+            self.finish(echostr)
+        else:
+            self.finish(echostr)
 
 
 class TestHandler(tornado.web.RequestHandler):
@@ -27,7 +39,7 @@ class TestHandler(tornado.web.RequestHandler):
 
 def make_app():
     return tornado.web.Application([
-        (r"/asyn_api", AsynHandler),
+        (r"/wx", WxHandler),
         (r"/test", TestHandler),
     ])
 
