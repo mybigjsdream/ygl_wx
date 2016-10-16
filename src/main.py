@@ -26,6 +26,7 @@ class WxHandler(tornado.web.RequestHandler):
             self.finish(echostr)
 
     def post(self, *args, **kwargs):
+        root_logger.info(self.request.body)
         if isinstance(wechat.message, EventMessage):
             root_logger.info(wechat.message.type)
 
