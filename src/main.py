@@ -27,6 +27,8 @@ class WxHandler(tornado.web.RequestHandler):
 
     def post(self, *args, **kwargs):
         root_logger.info(self.request.body)
+        data = self.request.body.decode("utf-8")
+        wechat.parse_data(data)
         if isinstance(wechat.message, EventMessage):
             root_logger.info(wechat.message.type)
 
