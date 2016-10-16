@@ -30,7 +30,7 @@ class WxHandler(tornado.web.RequestHandler):
         data = self.request.body.decode("utf-8")
         wechat.parse_data(data)
         if isinstance(wechat.message, EventMessage):
-            root_logger.info(wechat.message.type)
+            root_logger.info(wechat.message)
 
 
 class TestHandler(tornado.web.RequestHandler):
