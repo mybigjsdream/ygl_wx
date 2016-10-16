@@ -1,1 +1,0 @@
-sudo find /data1/you-get-video/media/qq/ -type f -mtime +1 -exec rm -f {} \;

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+
+"""
 import datetime
 from conf import DBSTR, DBARGS
 from sqlalchemy import Column, String, Sequence, Integer, DateTime
@@ -38,6 +40,4 @@ if __name__ == '__main__':
     session.add(video)
     session.commit()
     session.close()
-    # session = DBSession()
-    # video_infos = session.query(VideoInfo).all()
-    # print(video_infos)
+"""
