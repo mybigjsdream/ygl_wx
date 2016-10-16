@@ -2,7 +2,7 @@
 import json
 
 from conf import root_logger, HOST_IP, HOST_PORT, token, wechat
-from messages import EventMessage
+from wechat_sdk.messages import EventMessage
 import tornado.ioloop
 import tornado.web
 import hashlib
