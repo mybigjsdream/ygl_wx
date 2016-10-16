@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import logging
 from wechat_sdk import WechatConf
+# import wechat_sdk
 
 
 appname = "cms_spider_video"
@@ -17,11 +18,11 @@ root_logger = logging.getLogger()
 
 
 wx_conf = WechatConf(
-    token='your_token',
-    appid='your_appid',
-    appsecret='your_appsecret',
-    encrypt_mode='safe',
-    encoding_aes_key='your_encoding_aes_key'
+    token='dengjing',
+    appid='wxe8f39b5b477a688c',
+    appsecret='b91814b6d38c6550e94c617dcf6e1f29',
+    encrypt_mode='normal',
+    encoding_aes_key='fas6LnAZM2A7bvmWhIcLecPgeeft2hxzFiOArs9p2P8'
 )
 
 
