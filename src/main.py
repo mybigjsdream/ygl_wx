@@ -44,7 +44,7 @@ class WxHandler(tornado.web.RequestHandler):
                         'url': 'http://m.yigonglue.com/?id=%s' % '1',
                     }
                 ]
-                wechat.send_article_message(wechat.message.source, articles=None)
+                wechat.send_article_message(wechat.message.source, articles=articles)
 
 
 class TestHandler(tornado.web.RequestHandler):
