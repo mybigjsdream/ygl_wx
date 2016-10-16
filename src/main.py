@@ -36,6 +36,15 @@ class WxHandler(tornado.web.RequestHandler):
             root_logger.info(wechat.message.time)
             root_logger.info(wechat.message.type)
             root_logger.info(wechat.message.key)
+            if wechat.message.key == 'V0001_MENU':
+                articles = [
+                    {
+                        'title': u'咨询我的医生',
+                        'description': u'咨询我的绑定的医生',
+                        'url': 'http://m.yigonglue.com/?id=%s' % '1',
+                    }
+                ]
+                wechat.send_article_message(wechat.message.source, articles=None)
 
 
 class TestHandler(tornado.web.RequestHandler):
