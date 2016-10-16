@@ -33,5 +33,5 @@ wx_conf = WechatConf(
 
 # HOST_IP = '172.16.7.21'
 HOST_IP = '0.0.0.0'
-HOST_PORT = '8888'
-# HOST_PORT = '80'
+# HOST_PORT = '8888'
+HOST_PORT = '80'
