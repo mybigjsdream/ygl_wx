@@ -3,14 +3,15 @@ from conf import wx_conf
 from wechat_sdk import WechatBasic
 
 
-def main():
+def create_menu():
     wechat = WechatBasic(conf=wx_conf)
     menu_data = {
         'button': [
             {
                 'type': 'click',
                 'name': '咨询',
-                'key': 'V0001_CREATE_MENU'
+                # 'url': 'http://m.yigonglue.com:9000/wx/login'
+                'key': 'V0001_MENU'
             }
         ]
     }
@@ -18,5 +19,12 @@ def main():
     print(r)
 
 
+def del_menu():
+    wechat = WechatBasic(conf=wx_conf)
+    r = wechat.delete_menu()
+    print(r)
+
+
 if __name__ == '__main__':
-    main()
+    del_menu()
+    create_menu()
