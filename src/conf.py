@@ -2,6 +2,7 @@
 import logging
 
 appname = "cms_spider_video"
+token = "dengjing"
 
 LOGGING_FORMAT = '[%(levelname)1.1s %(asctime)s %(module)s:%(lineno)d] %(message)s'
 DATE_FORMAT = '%Y-%m-%d %H:%M:%S'

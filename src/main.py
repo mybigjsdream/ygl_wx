@@ -1,18 +1,14 @@
 # -*- coding: utf-8 -*-
 import json
 
-from conf import root_logger, HOST_IP, HOST_PORT
+from conf import root_logger, HOST_IP, HOST_PORT, token
 import tornado.ioloop
 import tornado.web
 import hashlib
 
-token = "dengjing"
-
 
 class WxHandler(tornado.web.RequestHandler):
     def get(self):
-        ret_json = {"status": 0}
-
         signature = self.get_argument('signature')
         timestamp = self.get_argument('timestamp')
         nonce = self.get_argument('nonce')
