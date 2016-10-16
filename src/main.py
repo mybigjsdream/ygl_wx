@@ -41,7 +41,8 @@ class WxHandler(tornado.web.RequestHandler):
                     {
                         'title': u'咨询我的医生',
                         'description': u'咨询我的绑定的医生',
-                        'url': 'http://m.yigonglue.com/?id=%s' % '1',
+                        'picurl': 'http://obsk2aox1.bkt.clouddn.com/78e0ea90-8527-11e6-9164-00163e032929',
+                        'url': 'http://m.yigonglue.com:9000/wx/login/?id=%s' % wechat.message.source,
                     }
                 ]
                 wechat.send_article_message(wechat.message.source, articles=articles)
