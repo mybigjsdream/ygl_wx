@@ -30,12 +30,12 @@ class WxHandler(tornado.web.RequestHandler):
         data = self.request.body.decode("utf-8")
         wechat.parse_data(data)
         if isinstance(wechat.message, EventMessage):
-            root_logger.info(wechat.message.id)
-            root_logger.info(wechat.message.target)
-            root_logger.info(wechat.message.source)
-            root_logger.info(wechat.message.time)
-            root_logger.info(wechat.message.type)
-            root_logger.info(wechat.message.key)
+            # root_logger.info(wechat.message.id)
+            # root_logger.info(wechat.message.target)
+            # root_logger.info(wechat.message.source)
+            # root_logger.info(wechat.message.time)
+            # root_logger.info(wechat.message.type)
+            # root_logger.info(wechat.message.key)
             if wechat.message.key == 'V0001_MENU':
                 articles = [
                     {
@@ -46,6 +46,11 @@ class WxHandler(tornado.web.RequestHandler):
                         }
                 ]
                 wechat.send_article_message(wechat.message.source, articles=articles)
+            if wechat.message.type == 'scan':
+                root_logger.info(u'扫描带的特殊值')
+                root_logger.info(wechat.message.key)
+                root_logger.info(u'扫描来源')
+                root_logger.info(wechat.message.source)
 
 
 class WxGetUserHandler(tornado.web.RequestHandler):
@@ -72,9 +77,6 @@ class WxGetQrcodeHandler(tornado.web.RequestHandler):
         ret_json = wechat.create_qrcode(data)
         y_ticket = ret_json['ticket']
         response = wechat.show_qrcode(y_ticket)
-        # with open('yourfilename', 'wb') as fd:
-        #     for chunk in response.iter_content(1024):
-        #         fd.write(chunk)
         self.set_header('Content-Type', 'image/jpg')
         for chunk in response.iter_content(1024):
             self.write(chunk)
