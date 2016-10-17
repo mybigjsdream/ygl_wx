@@ -67,7 +67,7 @@ class WxGetQrcodeHandler(tornado.web.RequestHandler):
     def get(self):
         user_id = self.get_argument('user_id')
         data = {
-            "action_name": "QR_LIMIT_SCENE",
+            "action_name": "QR_LIMIT_STR_SCENE",
             "action_info": {
                 "scene": {
                     "scene_str": user_id
