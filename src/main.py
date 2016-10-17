@@ -70,7 +70,7 @@ class WxGetQrcodeHandler(tornado.web.RequestHandler):
             "action_name": "QR_LIMIT_SCENE",
             "action_info": {
                 "scene": {
-                    "scene_id": user_id
+                    "scene_str": user_id
                 }
             }
         }
