@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from conf import wx_conf
+from conf import wx_conf, wechat
 from wechat_sdk import WechatBasic
 
 
@@ -25,6 +25,24 @@ def del_menu():
     print(r)
 
 
-if __name__ == '__main__':
+def handle_menu():
     del_menu()
     create_menu()
+
+
+def handle_qr(s):
+    data = {
+        "action_name": "QR_LIMIT_SCENE",
+        "action_info": {
+            "scene": {
+                "scene_id": s
+            }
+        }
+    }
+    r = wechat.create_qrcode(data)
+    print(r)  # gQH38DoAAAAAAAAAASxodHRwOi8vd2VpeGluLnFxLmNvbS9xLzVVbG4tYlRrbTE3aUhPLXQyMlVnAAIEXZUEWAMEAAAAAA==
+
+
+if __name__ == '__main__':
+    # handle_menu()
+    handle_qr('o5JfZshuxFoK1ZCdAZYYt41Bp5gE')

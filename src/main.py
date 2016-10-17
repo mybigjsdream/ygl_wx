@@ -43,7 +43,7 @@ class WxHandler(tornado.web.RequestHandler):
                         'description': u'咨询我的绑定的医生',
                         'picurl': 'http://obsk2aox1.bkt.clouddn.com/78e0ea90-8527-11e6-9164-00163e032929',
                         'url': 'http://m.yigonglue.com:9000/wx/login?user_id=%s' % wechat.message.source,
-                    }
+                        }
                 ]
                 wechat.send_article_message(wechat.message.source, articles=articles)
 
@@ -58,6 +58,29 @@ class WxGetUserHandler(tornado.web.RequestHandler):
         self.finish(json.dumps(ret_json))
 
 
+class WxGetQrcodeHandler(tornado.web.RequestHandler):
+    def get(self):
+        user_id = self.get_argument('user_id')
+        data = {
+            "action_name": "QR_LIMIT_SCENE",
+            "action_info": {
+                "scene": {
+                    "scene_id": user_id
+                }
+            }
+        }
+        ret_json = wechat.create_qrcode(data)
+        y_ticket = ret_json['ticket']
+        response = wechat.show_qrcode(y_ticket)
+        # with open('yourfilename', 'wb') as fd:
+        #     for chunk in response.iter_content(1024):
+        #         fd.write(chunk)
+        self.set_header('Content-Type', 'image/jpg')
+        for chunk in response.iter_content(1024):
+            self.write(chunk)
+        self.finish()
+
+
 class TestHandler(tornado.web.RequestHandler):
     def get(self):
         ret_json = {"status": 0}
@@ -70,8 +93,9 @@ def make_app():
     return tornado.web.Application([
         (r"/wx", WxHandler),
         (r"/wx_get_user", WxGetUserHandler),
+        (r"/wx_get_qrcode", WxGetQrcodeHandler),
         (r"/test", TestHandler),
-    ])
+        ])
 
 
 if __name__ == "__main__":
