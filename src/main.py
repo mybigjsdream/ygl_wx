@@ -26,17 +26,12 @@ class WxHandler(tornado.web.RequestHandler):
             self.finish(echostr)
 
     def post(self, *args, **kwargs):
-        root_logger.info(self.request.body)
         data = self.request.body.decode("utf-8")
         wechat.parse_data(data)
         if isinstance(wechat.message, EventMessage):
-            # root_logger.info(wechat.message.id)
-            # root_logger.info(wechat.message.target)
-            # root_logger.info(wechat.message.source)
-            # root_logger.info(wechat.message.time)
-            # root_logger.info(wechat.message.type)
-            # root_logger.info(wechat.message.key)
             if wechat.message.key == 'V0001_MENU':
+                root_logger.info(u'点击链接的来源')
+                root_logger.info(wechat.message.source)
                 articles = [
                     {
                         'title': u'咨询我的医生',
