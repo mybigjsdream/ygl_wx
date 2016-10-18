@@ -16,6 +16,7 @@ logging.basicConfig(
 )
 root_logger = logging.getLogger()
 
+mongo_str = 'mongodb://101.200.154.237:27017/'
 
 wx_conf = WechatConf(
     token='dengjing',

@@ -2,3 +2,4 @@ requests==2.11.1
 SQLAlchemy==1.1.1
 tornado==4.4.1
 wechat-sdk==0.6.4
+pymongo==3.3.0

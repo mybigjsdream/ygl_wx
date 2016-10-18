@@ -2,6 +2,7 @@
 import json
 
 from conf import root_logger, HOST_IP, HOST_PORT, token, wechat
+from model import insert_new_wx_user
 from wechat_sdk.messages import EventMessage
 import tornado.ioloop
 import tornado.web
@@ -46,6 +47,11 @@ class WxHandler(tornado.web.RequestHandler):
                 root_logger.info(wechat.message.key)
                 root_logger.info(u'扫描来源')
                 root_logger.info(wechat.message.source)
+                insert_new_wx_user(
+                    wechat.message.source,
+                    wechat.get_user_info(wechat.message.source, lang='zh_CN'),
+                    wechat.message.key
+                )
 
 
 class WxGetUserHandler(tornado.web.RequestHandler):
