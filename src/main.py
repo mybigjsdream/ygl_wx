@@ -57,7 +57,8 @@ class WxHandler(tornado.web.RequestHandler):
 class WxGetUserHandler(tornado.web.RequestHandler):
     def get(self):
         user_id = self.get_argument('user_id')
-        content = 'http://m.yigonglue.com:9000/wx/chart?role=doctor&wx_user_id=%s' % user_id
+        doctor_openid = self.get_argument('doctor_openid')
+        content = 'http://m.yigonglue.com:9000/wx/chart?role=doctor&wx_user_id=%s' % doctor_openid
         ret_json = wechat.send_text_message(user_id, content)
         self.set_header("Content-Type", "application/json;Charset=utf-8")
         self.finish(json.dumps(ret_json))
