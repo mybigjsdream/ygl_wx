@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from conf import mongo_str, root_logger
 from pymongo import MongoClient
+from pymongo.errors import DuplicateKeyError
 
 
 class DBHandle:
@@ -13,11 +14,15 @@ class DBHandle:
 
 def insert_new_wx_user(_id, data, doctor_openid):
     db = DBHandle()
-    ret = db.get_db().wx_user.insert({
-        '_id': _id,
-        'data': data,
-        'doctor_openid': doctor_openid
-    })
+    try:
+        ret = db.get_db().wx_user.insert({
+            '_id': _id,
+            'data': data,
+            'doctor_openid': doctor_openid
+        })
+    except DuplicateKeyError:
+        root_logger.info(u"插入insert_new_wx_user重复")
+        return
     root_logger.info(u"插入insert_new_wx_user")
     root_logger.info(ret)
 
