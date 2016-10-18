@@ -22,7 +22,12 @@ def insert_new_wx_user(_id, data, doctor_openid):
         })
     except DuplicateKeyError:
         root_logger.info(u"插入insert_new_wx_user重复")
-        return
+        ret = db.get_db().wx_user.update_one(
+            {'_id': _id},
+            {
+                '$set': {'doctor_openid': doctor_openid}
+            }
+        )
     root_logger.info(u"插入insert_new_wx_user")
     root_logger.info(ret)
 
