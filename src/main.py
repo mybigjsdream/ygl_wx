@@ -70,7 +70,8 @@ class WxSendMessageHandler(tornado.web.RequestHandler):
     def get(self):
         user_id = self.get_argument('user_id')
         doctor_openid = self.get_argument('doctor_openid')
-        url = 'http://m.yigonglue.com:9000/wx/chart?role=doctor&wx_user_id=%s' % doctor_openid
+        role = self.get_argument('role')
+        url = 'http://m.yigonglue.com:9000/wx/chart?role=%s&wx_user_id=%s' % (role, doctor_openid)
         short_url = long2short(url)
         content = u'你有新的消息，点击查看:' + short_url
         ret_json = wechat.send_text_message(user_id, content)
