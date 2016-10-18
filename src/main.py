@@ -56,8 +56,15 @@ class WxHandler(tornado.web.RequestHandler):
 
 class WxGetUserHandler(tornado.web.RequestHandler):
     def get(self):
-        # data = self.request.body.decode("utf-8")
-        # wechat.parse_data(data)
+        user_id = self.get_argument('user_id')
+        content = 'http://m.yigonglue.com:9000/wx/chart?role=doctor&wx_user_id=%s' % user_id
+        ret_json = wechat.send_text_message(user_id, content)
+        self.set_header("Content-Type", "application/json;Charset=utf-8")
+        self.finish(json.dumps(ret_json))
+
+
+class WxSendMessageHandler(tornado.web.RequestHandler):
+    def get(self):
         user_id = self.get_argument('user_id')
         ret_json = wechat.get_user_info(user_id, lang='zh_CN')
         self.set_header("Content-Type", "application/json;Charset=utf-8")
@@ -96,6 +103,7 @@ def make_app():
     return tornado.web.Application([
         (r"/wx", WxHandler),
         (r"/wx_get_user", WxGetUserHandler),
+        (r"/wx_send_message", WxSendMessageHandler),
         (r"/wx_get_qrcode", WxGetQrcodeHandler),
         (r"/test", TestHandler),
         ])
