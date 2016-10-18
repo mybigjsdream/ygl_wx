@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-from conf import mongo_str, root_logger
+import json
+from conf import mongo_str, root_logger, wechat
 from pymongo import MongoClient
 from pymongo.errors import DuplicateKeyError
+import requests
 
 
 class DBHandle:
@@ -38,5 +40,20 @@ def test():
     print(t)
 
 
+def long2short(long_url, url='https://api.weixin.qq.com/cgi-bin/shorturl', action='long2short'):
+    ret = wechat.get_access_token()
+    print(ret)
+    real_url = url + '?access_token=' + ret['access_token']
+    data = {
+        'action': action,
+        'long_url': long_url
+    }
+    r = requests.post(real_url, data=json.dumps(data))
+    print(r.json())
+    return r.json()['short_url']
+
+
 if __name__ == '__main__':
-    insert_new_wx_user('dscd', {}, 'dfd')
+    # insert_new_wx_user('dscd', {}, 'dfd')
+    # print(long2short('https://api.weixin.qq.com/cgi-bin/shorturl', 'long2short', 'http://m.yigonglue.com:9000/wx/chart?role=doctor&wx_user_id=o5JfZshuxFoK1ZCdAZYYt41Bp5gE'))
+    print(long2short('http://m.yigonglue.com:9000/wx/chart?role=doctor&wx_user_id=o5JfZshuxFoK1ZCdAZYYt41Bp5gE'))
