@@ -13,14 +13,13 @@ class DBHandle:
 
 def insert_new_wx_user(_id, data, doctor_openid):
     db = DBHandle()
-    root_logger.info(_id)
-    root_logger.info(data)
-    root_logger.info(doctor_openid)
-    db.get_db().wx_user.insert({
+    ret = db.get_db().wx_user.insert({
         '_id': _id,
         'data': data,
         'doctor_openid': doctor_openid
     })
+    root_logger.info(u"插入insert_new_wx_user")
+    root_logger.info(ret)
 
 
 def test():
