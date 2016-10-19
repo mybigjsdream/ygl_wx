@@ -51,7 +51,7 @@ class WxHandler(tornado.web.RequestHandler):
                 insert_new_wx_user(
                     wechat.message.source,
                     wechat.get_user_info(wechat.message.source, lang='zh_CN'),
-                    wechat.message.key
+                    wechat.get_user_info(wechat.message.key, lang='zh_CN')
                 )
 
 

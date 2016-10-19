@@ -14,20 +14,20 @@ class DBHandle:
         return self.client.ygl
 
 
-def insert_new_wx_user(_id, data, doctor_openid):
+def insert_new_wx_user(_id, data, doctor_data):
     db = DBHandle()
     try:
         ret = db.get_db().wx_user.insert({
             '_id': _id,
             'data': data,
-            'doctor_openid': doctor_openid
+            'doctor_data': doctor_data
         })
     except DuplicateKeyError:
         root_logger.info(u"插入insert_new_wx_user重复")
         ret = db.get_db().wx_user.update_one(
             {'_id': _id},
             {
-                '$set': {'doctor_openid': doctor_openid}
+                '$set': {'doctor_data': doctor_data}
             }
         )
     root_logger.info(u"插入insert_new_wx_user")
