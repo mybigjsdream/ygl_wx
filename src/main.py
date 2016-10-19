@@ -60,7 +60,8 @@ class WxGetUserHandler(tornado.web.RequestHandler):
         user_id = self.get_argument('user_id')
         try:
             ret_json = wechat.get_user_info(user_id, lang='zh_CN')
-        except OfficialAPIError:
+        except OfficialAPIError as e:
+            ret_json = {'message': e.errmsg}
             root_logger.info(u'用户信息官方报错')
         self.set_header("Content-Type", "application/json;Charset=utf-8")
         self.finish(json.dumps(ret_json))
