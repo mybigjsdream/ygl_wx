@@ -14,8 +14,17 @@ class DBHandle:
         return self.client.ygl
 
 
-def insert_new_wx_user(_id, data, doctor_data):
+def insert_new_wx_user(_id, data, doctor_id):
     db = DBHandle()
+    base_doctor_data = db.get_db().doctors.find_one({_id: doctor_id})
+    if not base_doctor_data:
+        root_logger.error(u"cant find doctor id")
+        return
+    doctor_data = {
+        '_id': base_doctor_data['_id'],
+        'nickname': base_doctor_data['doctorName'],
+        'headimgurl': base_doctor_data['avatar']
+    }
     try:
         ret = db.get_db().wx_user.insert({
             '_id': _id,
