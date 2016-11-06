@@ -18,7 +18,7 @@ def insert_new_wx_user(_id, data, doctor_id):
     db = DBHandle()
     base_doctor_data = db.get_db().doctors.find_one({_id: doctor_id})
     if not base_doctor_data:
-        root_logger.error(u"cant find doctor id")
+        root_logger.error(u"cant find doctor id of %s" % doctor_id)
         return
     doctor_data = {
         '_id': base_doctor_data['_id'],
