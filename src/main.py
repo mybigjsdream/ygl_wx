@@ -83,7 +83,10 @@ class WxSendMessageHandler(tornado.web.RequestHandler):
         url = 'http://m.yigonglue.com:9000/wx/chart?role=%s&wx_user_id=%s&doctor_id=%s' % (role, wx_user_id, doctor_id)
         short_url = long2short(url)
         content = u'你有新的消息，点击查看:' + short_url
-        ret_json = wechat.send_text_message(to_openid, content)
+        try:
+            ret_json = wechat.send_text_message(to_openid, content)
+        except OfficialAPIError as e:
+            root_logger.error('error when send message from %s to %s of %s' % (from_openid, to_openid, e))
         self.set_header("Content-Type", "application/json;Charset=utf-8")
         self.finish(json.dumps(ret_json))
 
