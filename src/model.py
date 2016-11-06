@@ -22,6 +22,7 @@ def insert_new_wx_user(_id, data, doctor_id):
         return
     doctor_data = {
         '_id': base_doctor_data['_id'],
+        'openid': base_doctor_data['_id'],
         'nickname': base_doctor_data['doctorName'],
         'headimgurl': base_doctor_data['avatar']
     }
