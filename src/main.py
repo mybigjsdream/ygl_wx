@@ -96,7 +96,7 @@ class WxUrlL2sHandler(tornado.web.RequestHandler):
         long_url = self.get_argument('url')
         short_url = long2short(long_url)
         self.set_header("Content-Type", "application/json;Charset=utf-8")
-        self.finish(json.dumps(short_url))
+        self.finish(short_url)
 
 
 class WxGetQrcodeHandler(tornado.web.RequestHandler):
