@@ -91,6 +91,14 @@ class WxSendMessageHandler(tornado.web.RequestHandler):
         self.finish(json.dumps(ret_json))
 
 
+class WxUrlL2sHandler(tornado.web.RequestHandler):
+    def get(self):
+        long_url = self.get_argument('url')
+        short_url = long2short(long_url)
+        self.set_header("Content-Type", "application/json;Charset=utf-8")
+        self.finish(json.dumps(short_url))
+
+
 class WxGetQrcodeHandler(tornado.web.RequestHandler):
     def get(self):
         user_id = self.get_argument('user_id')
@@ -125,6 +133,7 @@ def make_app():
         (r"/wx_get_user", WxGetUserHandler),
         (r"/wx_send_message", WxSendMessageHandler),
         (r"/wx_get_qrcode", WxGetQrcodeHandler),
+        (r"/wx_url_long2short", WxUrlL2sHandler),
         (r"/test", TestHandler),
         ])
 
