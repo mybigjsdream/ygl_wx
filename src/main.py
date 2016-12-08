@@ -37,7 +37,7 @@ class WxHandler(tornado.web.RequestHandler):
                 articles = [
                     {
                         'title': u'咨询我的医生',
-                        'description': u'咨询我的绑定的医生',
+                        'description': u'咨询我绑定的医生',
                         'picurl': 'http://o7z6eyjps.bkt.clouddn.com/%E6%9C%8D%E5%8A%A1%E5%8F%B7%E5%92%A8%E8%AF%A2%E6%8E%A8%E9%80%81%E5%9B%BE.png',
                         'url': 'http://m.yigonglue.com:9000/wx/login?user_id=%s' % wechat.message.source,
                         }
